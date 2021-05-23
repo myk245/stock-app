@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import './App.css';
 import { API_BASE } from './constants';
@@ -38,24 +38,30 @@ const Submit = styled.button`
 `;
 
 function App() {
-  // useEffect(() => {
-  //   fetch(`${API_BASE}?token=${process.env.REACT_APP_API_KEY}`, {
-  //     "method": "GET",
-  //     "headers": {
-  //       'Content-Type': 'application/json'
-  //     }
-  //   })
-  //     .then(resp => resp.json())
-  //     .then(data => console.log(data))
-  // })
+  const [searchTerm, setSearchTerm] = useState("");
 
+  const handleChange = (event) => {
+    setSearchTerm(event.target.value)
+  }
+
+  // on submit, grab the search term and call the appropriate api endpoint
+  const handleSubmit = () => {
+    fetch(`${API_BASE}/search/${searchTerm}?token=${process.env.REACT_APP_API_KEY}`, {
+      "method": "GET",
+      "headers": {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(resp => resp.json())
+      .then(data => console.log(data))
+  }
 
   return (
     <div className="App">
       <Navbar>
         <SearchDiv>
-          <Search placeholder="Stock Symbol"/>
-          <Submit>Search</Submit>
+          <Search onChange={handleChange} placeholder="Stock Symbol"/>
+          <Submit type="submit" onClick={handleSubmit}>Search</Submit>
         </SearchDiv>
       </Navbar>
       <Title>BORUS Test App</Title>
