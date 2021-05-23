@@ -54,13 +54,15 @@ function App() {
     })
       .then(resp => resp.json())
       .then(data => console.log(data))
+      // clear the search field in UI
+      .then(setSearchTerm(""));
   }
 
   return (
     <div className="App">
       <Navbar>
         <SearchDiv>
-          <Search onChange={handleChange} placeholder="Stock Symbol"/>
+          <Search type="text" onChange={handleChange} value={searchTerm}placeholder="Stock Symbol"/>
           <Submit type="submit" onClick={handleSubmit}>Search</Submit>
         </SearchDiv>
       </Navbar>
