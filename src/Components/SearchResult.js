@@ -2,7 +2,7 @@ import { ContactlessOutlined } from '@material-ui/icons';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { API_BASE } from '../constants';
-import StockPage from './StockPage';
+import StockModal from './StockModal';
 
 const ResultDiv = styled.div`
    border: 1px solid #e5e5e5;
@@ -22,15 +22,24 @@ function SearchResult(props) {
          .then(data => {
             setModalOpen(true)
             setCompanyInfo(data)
-          }) 
+         }) 
    }
 
    return (
-      <ResultDiv onClick={fetchDetails}>
-         <h4>Symbol: {props.symbol}</h4>
-         <p>Stock Name: {props.name}</p>
-         <p>Region: {props.region}</p>
-      </ResultDiv>
+      <div>
+         <ResultDiv>
+            <h4>Symbol: {props.symbol}</h4>
+            <p>Stock Name: {props.name}</p>
+            <p>Region: {props.region}</p>
+            <button onClick={fetchDetails}>See Company Profile</button>
+         </ResultDiv>
+         
+         <StockModal
+            show={modalOpen}
+            onHide={() => setModalOpen(false)}
+            stockDetails={companyInfo}
+         />
+      </div>
    )
 }
 

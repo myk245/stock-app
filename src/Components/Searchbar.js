@@ -3,8 +3,6 @@ import styled from 'styled-components';
 
 const Navbar = styled.div`
    height: 64px;
-   z-index: 8;
-   position: fixed;
    width: 100%;
    top: 0;
    display: flex;
