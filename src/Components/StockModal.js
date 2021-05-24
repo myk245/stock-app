@@ -9,6 +9,9 @@ const ModalDiv = styled.div`
 `;
 
 function StockModal(props) {
+   console.log(props.stockDetails)
+   console.log(props.companyNews)
+
    return (
       <Modal
          className="modal"

@@ -1,8 +1,6 @@
-import { ContactlessOutlined } from '@material-ui/icons';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { API_BASE } from '../constants';
-import StockModal from './StockModal';
+import CompanyDetails from './CompanyDetails';
 
 const ResultDiv = styled.div`
    border: 1px solid #e5e5e5;
@@ -13,16 +11,11 @@ const ResultDiv = styled.div`
 `;
 
 function SearchResult(props) {
-   const [modalOpen, setModalOpen] = useState(false);
+   const [showDetails, setShowDetails] = useState(false);
    const [companyInfo, setCompanyInfo] = useState([]);
 
-   const fetchDetails = () => {
-      fetch(`${API_BASE}/stock/${props.symbol}/company?token=${process.env.REACT_APP_API_KEY}`)
-         .then(response => response.json())
-         .then(data => {
-            setModalOpen(true)
-            setCompanyInfo(data)
-         }) 
+   const toggleShowDetails = () => {
+      setShowDetails(true)
    }
 
    return (
@@ -31,14 +24,23 @@ function SearchResult(props) {
             <h4>Symbol: {props.symbol}</h4>
             <p>Stock Name: {props.name}</p>
             <p>Region: {props.region}</p>
-            <button onClick={fetchDetails}>See Company Profile</button>
+            <button onClick={toggleShowDetails}>See Company Profile</button>
          </ResultDiv>
          
-         <StockModal
+         {/* conditionally render company details depending on showDetails */}
+         {showDetails
+            ?
+            <CompanyDetails symbol={props.symbol}/>
+            :
+            null
+         }
+
+         {/* <StockModal
             show={modalOpen}
             onHide={() => setModalOpen(false)}
-            stockDetails={companyInfo}
-         />
+            stockDetails={companyInfo[0]}
+            companyNews={companyInfo[1]}
+         /> */}
       </div>
    )
 }

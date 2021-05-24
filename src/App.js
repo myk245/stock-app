@@ -45,6 +45,7 @@ function App() {
     <div className="App">
       <Searchbar handleChange={handleChange} handleSubmit={handleSubmit} searchTerm={searchTerm}/>
       <Title>BORUS Test App</Title>
+
       <ResultsContainer>
         {/* cik is a unique identifier - but the cik for some results are null, so we are using the uuid package to generate the keys here */}
         {results.map(result => <SearchResult key={uuidv4()} symbol={result.symbol} name={result.name} region={result.region}/>)}
