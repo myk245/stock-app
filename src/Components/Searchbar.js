@@ -16,11 +16,6 @@ const Navbar = styled.div`
    box-sizing: border-box;
 `;
 
-const Title = styled.div`
-   margin-top: 100px;
-   font-size: 25px;
-`;
-
 const SearchDiv = styled.div`
    margin: 0 auto;
 `;

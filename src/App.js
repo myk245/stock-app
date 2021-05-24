@@ -3,43 +3,22 @@ import styled from 'styled-components';
 import './App.css';
 import { API_BASE } from './constants';
 import Searchbar from './Components/Searchbar';
+import SearchResult from './Components/SearchResult';
 
-const Navbar = styled.div`
-  height: 64px;
-  z-index: 8;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: white;
-  box-shadow: 0 1px 4px rgba(0,0,0,.1);
-  padding: 0 16px;
-  box-sizing: border-box;
-`;
 
 const Title = styled.div`
   margin-top: 100px;
   font-size: 25px;
 `;
 
-const SearchDiv = styled.div`
-  margin: 0 auto;
-`;
-
-const Search = styled.input`
-  margin: 0 auto;
-  padding: 5px;
-  width: 200px;
-`;
-
-const Submit = styled.button`
-  padding: 5px;
+const ResultsContainer = styled.div`
+  border: 1px solid #e5e5e5;
+  margin-top: 10px;
 `;
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
+  const [results, setResults] = useState([]);
 
   const handleChange = (event) => {
     setSearchTerm(event.target.value)
@@ -54,17 +33,38 @@ function App() {
       }
     })
       .then(resp => resp.json())
-      .then(data => console.log(data))
+      .then(data => setResults(data))
       // clear the search field in UI
       .then(setSearchTerm(""));
   }
+
+  console.log(results)
 
   return (
     <div className="App">
       <Searchbar handleChange={handleChange} handleSubmit={handleSubmit} searchTerm={searchTerm}/>
       <Title>BORUS Test App</Title>
+      <ResultsContainer>
+        {results.map(result => <SearchResult key={result.figi} symbol={result.symbol} name={result.name} region={result.region}/>)}
+      </ResultsContainer>
     </div>
   );
 }
 
 export default App;
+
+// cik: "328487"
+// currency: "USD"
+// exchange: "NAS"
+// exchangeName: "DGBSA/ ANL STEK(T)LMLOQESENCRAA G"
+// exchangeSuffix: null
+// figi: "XR0GYB40B9B0"
+// iexId: "IEX_4D48333344362D52"
+// lei: "U94OBKMT8P0RFGHPWXU3"
+// name: "pnAcI lep"
+// region: "US"
+// sector: "aunMricgutnfa"
+// securityName: " InplApce"
+// securityType: "sc"
+// symbol: "AAPL"
+// type: "cs"
