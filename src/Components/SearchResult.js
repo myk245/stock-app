@@ -12,7 +12,6 @@ const ResultDiv = styled.div`
 
 function SearchResult(props) {
    const [showDetails, setShowDetails] = useState(false);
-   const [companyInfo, setCompanyInfo] = useState([]);
 
    const toggleShowDetails = () => {
       setShowDetails(true)
