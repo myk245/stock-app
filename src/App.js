@@ -6,15 +6,12 @@ import { API_BASE } from './constants';
 import Searchbar from './Components/Searchbar';
 import SearchResult from './Components/SearchResult';
 
-
 const Title = styled.div`
-  margin-top: 100px;
+  margin-top: 50px;
   font-size: 25px;
 `;
-
 const ResultsContainer = styled.div`
-  border: 1px solid #e5e5e5;
-  margin-top: 10px;
+  margin-top: 0 auto;
 `;
 
 function App() {
@@ -39,7 +36,7 @@ function App() {
       .then(setSearchTerm(""));
   }
 
-  console.log(results)
+  // console.log(results)
 
   return (
     <div className="App">
@@ -48,8 +45,8 @@ function App() {
 
       <ResultsContainer>
         {/* cik is a unique identifier - but the cik for some results are null, so we are using the uuid package to generate the keys here */}
-        {results.map(result => <SearchResult key={uuidv4()} symbol={result.symbol} name={result.name} region={result.region}/>)}
-      </ResultsContainer>
+        {results.map(result => <SearchResult key={uuidv4()} symbol={result.symbol} name={result.name} region={result.region}/>)} 
+      </ResultsContainer>  
     </div>
   );
 }
