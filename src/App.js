@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { v4 as uuidv4 } from 'uuid';
 import './App.css';
 import { API_BASE } from './constants';
 import Searchbar from './Components/Searchbar';
@@ -45,7 +46,8 @@ function App() {
       <Searchbar handleChange={handleChange} handleSubmit={handleSubmit} searchTerm={searchTerm}/>
       <Title>BORUS Test App</Title>
       <ResultsContainer>
-        {results.map(result => <SearchResult key={result.figi} symbol={result.symbol} name={result.name} region={result.region}/>)}
+        {/* cik is a unique identifier - but the cik for some results are null, so we are using the uuid package to generate the keys here */}
+        {results.map(result => <SearchResult key={uuidv4()} symbol={result.symbol} name={result.name} region={result.region}/>)}
       </ResultsContainer>
     </div>
   );
