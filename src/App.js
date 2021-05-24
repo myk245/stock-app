@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import './App.css';
 import { API_BASE } from './constants';
+import Searchbar from './Components/Searchbar';
 
 const Navbar = styled.div`
   height: 64px;
@@ -60,12 +61,7 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar>
-        <SearchDiv>
-          <Search type="text" onChange={handleChange} value={searchTerm}placeholder="Stock Symbol"/>
-          <Submit type="submit" onClick={handleSubmit}>Search</Submit>
-        </SearchDiv>
-      </Navbar>
+      <Searchbar handleChange={handleChange} handleSubmit={handleSubmit} searchTerm={searchTerm}/>
       <Title>BORUS Test App</Title>
     </div>
   );
